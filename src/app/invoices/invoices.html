@@ -13,11 +13,15 @@
           <p class="font-bold text-[#000]">
             <span class="text-[#888EB0]">#</span>{{ item.invoiceId }}
           </p>
-          <p>Due {{ item.paymentDue | date: 'dd MMM yyyy' }}</p>
+
+          <p>Due {{ item.paymentDue }}</p>
+
           <p>
             {{ item.clientName }}
           </p>
+
           <p class="justify-self-end font-bold text-[#000]">&pound;{{ item.total }}</p>
+
           <p class="justify-self-end">
             {{ item.status }}
           </p>
