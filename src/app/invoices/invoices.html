@@ -10,23 +10,14 @@
         <div
           class="mt-[40px] w-[730px] h-[72px] bg-white grid grid-cols-[100px_150px_1fr_100px_100px] items-center text-[#888EB0] px-8"
         >
-          <!-- 1 -->
           <p class="font-bold text-[#000]">
             <span class="text-[#888EB0]">#</span>{{ item.invoiceId }}
           </p>
-
-          <!-- 2 -->
           <p>Due {{ item.paymentDue | date: 'dd MMM yyyy' }}</p>
-
-          <!-- 3 -->
           <p>
             {{ item.clientName }}
           </p>
-
-          <!-- 4 - right -->
           <p class="justify-self-end font-bold text-[#000]">&pound;{{ item.total }}</p>
-
-          <!-- 5 - right -->
           <p class="justify-self-end">
             {{ item.status }}
           </p>
