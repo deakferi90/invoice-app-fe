@@ -14,7 +14,7 @@
             <span class="text-[#888EB0]">#</span>{{ item.invoiceId }}
           </p>
 
-          <p>Due {{ item.paymentDue }}</p>
+          <p>Due {{ item.paymentDue | date: 'dd MMM yyyy' }}</p>
 
           <p>
             {{ item.clientName }}

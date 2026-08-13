@@ -7,6 +7,7 @@ import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-invoices',
   standalone: true,
+  imports: [DatePipe],
   templateUrl: './invoices.html',
   styleUrl: './invoices.scss',
 })
