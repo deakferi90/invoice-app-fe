@@ -1,8 +1,28 @@
 <div class="invoices-container">
   <div class="w-[768px] pl-[19px]">
-    <div class="inner-header">
-      <h1 class="text-4xl font-bold">Invoices</h1>
-      <span class="text-[#888EB0] font-normal">These are 4 pending invoices</span>
+    <div class="inner-header pt-[50px] flex justify-between">
+      <div>
+        <h1 class="text-4xl font-bold">Invoices</h1>
+        <span class="text-[#888EB0] font-normal">These are 4 pending invoices</span>
+      </div>
+      <div>
+        <ul placeholder="Filter By Status">
+          <li>Draft</li>
+          <li>Pending</li>
+          <li>Paid</li>
+        </ul>
+      </div>
+      <div class="font-bold height-[48px] flex items-center gap-[10px]">
+        <button
+          class="bg-[#9277FF] w-[150px] h-[48px] mr-[20px] rounded-4xl text-white cursor-pointer flex items-center gap-[8px] pl-[8px]"
+        >
+          <span
+            class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#9277FF] pb-[5px]"
+            >+</span
+          >
+          New Invoice
+        </button>
+      </div>
     </div>
 
     <div class="box-container mt-[70px]">
