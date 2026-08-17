@@ -1,18 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule, MatSelect } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { InvoiceService } from './invoice';
 import { Invoice } from './invoice.interface';
-import { DatePipe } from '@angular/common';
-import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-invoices',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule],
   templateUrl: './invoices.html',
   styleUrl: './invoices.scss',
 })
 export class Invoices implements OnInit {
+  @ViewChild(MatSelect) matSelect!: MatSelect;
   items: Invoice[] = [];
+  filteredItems: Invoice[] = [];
+
+  statusList = ['draft', 'pending', 'paid'];
+
+  selectedStatuses = new FormControl<string[]>([], {
+    nonNullable: true,
+  });
+
   constructor(
     private invoice: InvoiceService,
     private cdr: ChangeDetectorRef,
@@ -20,16 +32,28 @@ export class Invoices implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+
+    this.selectedStatuses.valueChanges.subscribe((statuses) => {
+      this.filterInvoices(statuses);
+      this.matSelect.close();
+    });
   }
 
-  getData() {
+  filterInvoices(statuses: string[]): void {
+    if (statuses.length === 0) {
+      this.filteredItems = this.items;
+      return;
+    }
+
+    this.filteredItems = this.items.filter((invoice) => statuses.includes(invoice.status));
+  }
+
+  getData(): void {
     this.invoice.displayData().subscribe({
       next: (data) => {
         this.items = data;
-
+        this.filteredItems = data;
         this.cdr.detectChanges();
-
-        console.log(this.items);
       },
       error: (error) => {
         console.error('Error fetching invoices:', error);

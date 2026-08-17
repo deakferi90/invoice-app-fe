@@ -7,3 +7,57 @@
   background: #fff;
   border-radius: 12px;
 }
+
+.status-filter {
+  width: 180px;
+
+  // Remove the default Material outline
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+
+  .mat-mdc-text-field-wrapper {
+    padding: 0;
+    background: transparent;
+  }
+
+  .mat-mdc-form-field-flex {
+    padding: 0;
+  }
+
+  .mat-mdc-form-field-infix {
+    min-height: auto;
+    padding: 0;
+    border: 0;
+  }
+
+  .mdc-notched-outline {
+    display: none;
+  }
+
+  .mat-mdc-select {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .mat-mdc-select-value {
+    color: #0c0e16;
+  }
+
+  .mat-mdc-select-arrow {
+    color: #7c5dfa;
+  }
+
+  .example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+    line-height: 1;
+  }
+
+  .mat-mdc-select-panel {
+    border-radius: 12px !important;
+    padding: 16px 0 !important;
+    background: white !important;
+    box-shadow: 0 10px 30px rgba(72, 84, 159, 0.18) !important;
+  }
+}

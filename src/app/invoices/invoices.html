@@ -1,23 +1,43 @@
 <div class="invoices-container">
-  <div class="w-[768px] pl-[19px]">
-    <div class="inner-header pt-[50px] flex justify-between">
+  <div class="w-3xl pl-4.75">
+    <div class="inner-header pt-12.5 flex justify-between">
       <div>
         <h1 class="text-4xl font-bold">Invoices</h1>
         <span class="text-[#888EB0] font-normal">These are 4 pending invoices</span>
       </div>
-      <div>
-        <ul placeholder="Filter By Status">
-          <li>Draft</li>
-          <li>Pending</li>
-          <li>Paid</li>
-        </ul>
-      </div>
-      <div class="font-bold height-[48px] flex items-center gap-[10px]">
+      <mat-form-field>
+        <mat-label>Filter By Status</mat-label>
+
+        <mat-select [formControl]="selectedStatuses" multiple>
+          <mat-select-trigger>
+            @if (selectedStatuses.value.length > 0) {
+              {{ selectedStatuses.value[0] }}
+
+              @if (selectedStatuses.value.length > 1) {
+                <span class="example-additional-selection">
+                  (+{{ selectedStatuses.value.length - 1 }}
+                  {{ selectedStatuses.value.length === 2 ? 'other' : 'others' }})
+                </span>
+              }
+            } @else {
+              Filter By Status
+            }
+          </mat-select-trigger>
+
+          @for (status of statusList; track status) {
+            <mat-option [value]="status">
+              {{ status }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <div class="font-bold height-[48px] flex items-center gap-2.5">
         <button
-          class="bg-[#9277FF] w-[150px] h-[48px] mr-[20px] rounded-4xl text-white cursor-pointer flex items-center gap-[8px] pl-[8px]"
+          class="bg-[#9277FF] w-37.5 h-12 mr-5 rounded-4xl text-white cursor-pointer flex items-center gap-2 pl-2"
         >
           <span
-            class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#9277FF] pb-[5px]"
+            class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#9277FF] pb-1.25"
             >+</span
           >
           New Invoice
@@ -25,12 +45,12 @@
       </div>
     </div>
 
-    <div class="box-container mt-[70px]">
-      @for (item of items; track item.invoiceId) {
+    <div class="box-container mt-17.5">
+      @for (item of filteredItems; track item.invoiceId) {
         <div
-          class="mt-[40px] w-[730px] h-[72px] bg-white grid grid-cols-[100px_150px_1fr_100px_100px] items-center text-[#888EB0] px-8"
+          class="mt-10 w-182.5 h-18 bg-white grid grid-cols-[100px_150px_1fr_100px_100px] items-center text-[#888EB0] px-8"
         >
-          <p class="font-bold text-[#000]">
+          <p class="font-bold text-black">
             <span class="text-[#888EB0]">#</span>{{ item.invoiceId }}
           </p>
 
@@ -40,7 +60,7 @@
             {{ item.clientName }}
           </p>
 
-          <p class="justify-self-end font-bold text-[#000]">&pound;{{ item.total }}</p>
+          <p class="justify-self-end font-bold text-black">&pound;{{ item.total }}</p>
 
           <p class="justify-self-end">
             {{ item.status }}

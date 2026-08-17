@@ -1,1 +1,39 @@
 @import 'tailwindcss';
+
+.cdk-overlay-pane {
+  z-index: 1000 !important;
+  background: #fff !important;
+}
+
+.cdk-overlay-container {
+  position: fixed !important;
+  z-index: 9999 !important;
+}
+
+.mat-mdc-select-panel {
+  z-index: 9999 !important;
+}
+
+div.mat-mdc-select-panel {
+  background: #fff !important;
+}
+
+.mat-pseudo-checkbox {
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 4px !important;
+
+  border: 1px solid #9277ff !important;
+  background: #eee9ff !important;
+}
+
+/* Selected */
+.mat-pseudo-checkbox.mat-pseudo-checkbox-checked {
+  background: #9277ff !important;
+  border-color: #9277ff !important;
+}
+
+/* White checkmark */
+.mat-pseudo-checkbox.mat-pseudo-checkbox-checked::after {
+  border-color: #ffffff !important;
+}
