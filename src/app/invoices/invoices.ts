@@ -19,7 +19,23 @@ export class Invoices implements OnInit {
   items: Invoice[] = [];
   filteredItems: Invoice[] = [];
 
-  statusList = ['draft', 'pending', 'paid'];
+  statusList = [
+    {
+      value: 'draft',
+      textColor: '#373B53',
+      backgroundColor: '#F0F0F5',
+    },
+    {
+      value: 'pending',
+      textColor: '#FF8F00',
+      backgroundColor: '#FFF4E5',
+    },
+    {
+      value: 'paid',
+      textColor: '#33D69F',
+      backgroundColor: '#E6F9F3',
+    },
+  ];
 
   selectedStatuses = new FormControl<string[]>([], {
     nonNullable: true,
@@ -46,6 +62,19 @@ export class Invoices implements OnInit {
     }
 
     this.filteredItems = this.items.filter((invoice) => statuses.includes(invoice.status));
+  }
+
+  getStatus(status: string) {
+    return this.statusList.find((item) => item.value === status);
+  }
+
+  getStatusStyle(status: string) {
+    const statusItem = this.statusList.find((item) => item.value === status);
+
+    return {
+      color: statusItem?.textColor ?? '',
+      backgroundColor: statusItem?.backgroundColor ?? '',
+    };
   }
 
   getData(): void {
