@@ -48,7 +48,7 @@
     <div class="box-container mt-17.5">
       @for (item of filteredItems; track item.invoiceId) {
         <div
-          class="mt-10 w-182.5 h-18 bg-white grid grid-cols-[100px_150px_1fr_100px_160px] items-center text-[#888EB0] px-8"
+          class="mt-10 w-182.5 h-18 bg-white grid grid-cols-[100px_150px_1fr_100px_160px_8px] items-center text-[#888EB0] px-8"
         >
           <p class="font-bold text-black">
             <span class="text-[#888EB0]">#</span>{{ item.invoiceId }}
@@ -75,7 +75,8 @@
 
               {{ item.status.charAt(0).toUpperCase() + item.status.slice(1) }}
             </div>
-
+          </div>
+          <div>
             <img src="/arrow-right.png" alt="arrow-right" />
           </div>
         </div>
