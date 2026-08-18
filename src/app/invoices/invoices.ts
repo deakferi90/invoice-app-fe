@@ -41,10 +41,7 @@ export class Invoices implements OnInit {
     nonNullable: true,
   });
 
-  constructor(
-    private invoice: InvoiceService,
-    private cdr: ChangeDetectorRef,
-  ) {}
+  constructor(private invoice: InvoiceService) {}
 
   ngOnInit(): void {
     this.getData();
@@ -82,7 +79,6 @@ export class Invoices implements OnInit {
       next: (data) => {
         this.items = data;
         this.filteredItems = data;
-        this.cdr.detectChanges();
       },
       error: (error) => {
         console.error('Error fetching invoices:', error);
