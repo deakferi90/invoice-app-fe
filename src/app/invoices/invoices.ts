@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { InvoiceService } from './invoice';
 import { Invoice } from './invoice.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-invoices',
@@ -41,7 +42,11 @@ export class Invoices implements OnInit {
     nonNullable: true,
   });
 
-  constructor(private invoice: InvoiceService) {}
+  constructor(
+    private invoice: InvoiceService,
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.getData();
@@ -74,11 +79,18 @@ export class Invoices implements OnInit {
     };
   }
 
+  redirectToDetails(item: Invoice) {
+    this.router.navigate(['/invoice', item.invoiceId], {
+      state: { item },
+    });
+  }
+
   getData(): void {
     this.invoice.displayData().subscribe({
       next: (data) => {
         this.items = data;
         this.filteredItems = data;
+        this.cdr.detectChanges();
       },
       error: (error) => {
         console.error('Error fetching invoices:', error);
