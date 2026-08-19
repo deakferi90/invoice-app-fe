@@ -1,1 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
 
+#toast-container {
+  position: fixed !important;
+  top: 24px !important;
+  right: 24px !important;
+  left: auto !important;
+  bottom: auto !important;
+  z-index: 99999 !important;
+}
+
+#toast-container > .ngx-toastr {
+  width: 360px !important;
+  min-height: 72px;
+  margin: 0 0 12px 0;
+  padding: 16px 20px 16px 52px;
+
+  border-radius: 12px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+  font-family: 'League Spartan', sans-serif;
+}
+
+#toast-container > .toast-success {
+  background-color: #33d69f;
+  color: #ffffff;
+}
+
+#toast-container > .toast-success .toast-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+#toast-container > .toast-success .toast-message {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#toast-container > .ngx-toastr .toast-close-button {
+  color: #ffffff;
+  opacity: 1;
+}

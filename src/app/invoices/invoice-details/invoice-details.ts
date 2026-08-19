@@ -1,7 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Invoice } from '../invoice.interface';
 import { CommonModule } from '@angular/common';
+import { InvoiceService } from '../invoice';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteConfirmation } from '../delete-confirmation/delete-confirmation';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-invoice-details',
@@ -30,7 +34,12 @@ export class InvoiceDetails {
     },
   ];
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private invoiceService: InvoiceService,
+    private dialog: MatDialog,
+    private cdr: ChangeDetectorRef,
+  ) {
     this.item = history.state.item;
   }
 
@@ -39,5 +48,32 @@ export class InvoiceDetails {
   }
   goBack() {
     this.router.navigate(['/']);
+  }
+
+  deleteInvoice(invoiceId: string): void {
+    this.dialog.open(DeleteConfirmation, {
+      height: '250px',
+      width: '480px',
+      data: {
+        invoiceId: invoiceId,
+      },
+    });
+  }
+
+  markAsPaid(): void {
+    if (this.item.status !== 'pending' && this.item.status !== 'draft') {
+      return;
+    }
+
+    this.invoiceService.markAsPaid(this.item.invoiceId).subscribe({
+      next: (updatedInvoice) => {
+        this.item = updatedInvoice;
+        this.router.navigate(['/']);
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('Error updating invoice:', error);
+      },
+    });
   }
 }

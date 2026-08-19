@@ -42,12 +42,14 @@
         </button>
 
         <button
+          (click)="deleteInvoice(item.invoiceId)"
           class="h-12 rounded-full bg-[#EC5757] px-7 font-bold text-white cursor-pointer transition hover:bg-[#D94A4A]"
         >
           Delete
         </button>
 
         <button
+          (click)="markAsPaid()"
           class="h-12 rounded-full bg-[#7C5CFC] px-7 font-bold text-white cursor-pointer transition hover:bg-[#6545E8]"
         >
           Mark as Paid

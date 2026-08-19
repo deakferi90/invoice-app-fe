@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { InvoiceService } from './invoice';
 import { Invoice } from './invoice.interface';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-invoices',
@@ -43,9 +44,10 @@ export class Invoices implements OnInit {
   });
 
   constructor(
-    private invoice: InvoiceService,
+    private invoiceService: InvoiceService,
     private cdr: ChangeDetectorRef,
     private router: Router,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -86,7 +88,7 @@ export class Invoices implements OnInit {
   }
 
   getData(): void {
-    this.invoice.displayData().subscribe({
+    this.invoiceService.displayData().subscribe({
       next: (data) => {
         this.items = data;
         this.filteredItems = data;
@@ -94,6 +96,27 @@ export class Invoices implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching invoices:', error);
+      },
+    });
+  }
+
+  markAsPaid(invoiceId: string): void {
+    const invoice = this.items.find((item) => item.invoiceId === invoiceId);
+
+    if (!invoice || (invoice.status !== 'pending' && invoice.status !== 'draft')) {
+      return;
+    }
+
+    this.invoiceService.markAsPaid(invoiceId).subscribe({
+      next: () => {
+        invoice.status = 'paid';
+
+        this.toastr.success('Invoice marked as paid');
+      },
+      error: (error: any) => {
+        console.error('Error updating invoice:', error);
+
+        this.toastr.error('Failed to update invoice', 'Error');
       },
     });
   }

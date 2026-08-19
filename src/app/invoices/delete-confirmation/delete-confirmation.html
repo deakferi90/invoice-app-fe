@@ -1,0 +1,24 @@
+<h2 mat-dialog-title class="modal-title">Confirm Deletion</h2>
+
+<mat-dialog-content>
+  <p class="font-league-spartan text-[#888EB0] text-[13px] font-bold">
+    Are you sure you want to delete invoice #{{ data.invoiceId }} ? This action cannot be undone.
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button
+    class="h-12 rounded-full mr-3 bg-[#F9FAFE] text-[#7e88c3] px-7 font-bold cursor-pointer transition hover:bg-[#F9FAFE]"
+    (click)="onNoClick()"
+  >
+    Cancel
+  </button>
+
+  <button
+    class="h-12 rounded-full bg-[#EC5757] px-7 font-bold text-white cursor-pointer transition hover:bg-[#D94A4A]"
+    color="warn"
+    (click)="onDeleteClick()"
+  >
+    Delete
+  </button>
+</mat-dialog-actions>
