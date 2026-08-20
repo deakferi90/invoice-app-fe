@@ -68,8 +68,8 @@ export class InvoiceDetails {
     this.invoiceService.markAsPaid(this.item.invoiceId).subscribe({
       next: (updatedInvoice) => {
         this.item = updatedInvoice;
-        this.router.navigate(['/']);
         this.cdr.detectChanges();
+        //this.router.navigate(['/']);
       },
       error: (error) => {
         console.error('Error updating invoice:', error);
