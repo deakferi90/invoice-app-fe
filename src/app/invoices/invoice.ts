@@ -15,15 +15,19 @@ export class InvoiceService {
     return this.http.get<Invoice[]>(this.apiUrl);
   }
 
+  getInvoice(invoiceId: string): Observable<Invoice> {
+    return this.http.get<Invoice>(`${this.apiUrl}/${invoiceId}`);
+  }
+
   deleteInvoice(invoiceId: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${invoiceId}`);
   }
 
   updateInvoiceStatus(invoiceId: string, status: 'draft' | 'pending' | 'paid') {
-    return this.http.patch(`http://localhost:5000/api/invoices/${invoiceId}`, { status });
+    return this.http.patch(`${this.apiUrl}/${invoiceId}`, { status });
   }
 
-  markAsPaid(invoiceId: string) {
-    return this.http.patch<Invoice>(`http://localhost:5000/api/invoices/${invoiceId}/pay`, {});
+  markAsPaid(invoiceId: string): Observable<Invoice> {
+    return this.http.patch<Invoice>(`${this.apiUrl}/${invoiceId}/pay`, {});
   }
 }

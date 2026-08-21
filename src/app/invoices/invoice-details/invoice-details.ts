@@ -1,11 +1,12 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { Invoice } from '../invoice.interface';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { InvoiceService } from '../invoice';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteConfirmation } from '../delete-confirmation/delete-confirmation';
 import { ToastrService } from 'ngx-toastr';
+
+import { Invoice } from '../invoice.interface';
+import { InvoiceService } from '../invoice';
+import { DeleteConfirmation } from '../delete-confirmation/delete-confirmation';
 
 @Component({
   selector: 'app-invoice-details',
@@ -13,9 +14,10 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './invoice-details.html',
   styleUrl: './invoice-details.scss',
 })
-export class InvoiceDetails {
-  item!: Invoice;
+export class InvoiceDetails implements OnInit {
+  item: Invoice | null = null;
 
+  // Status colors
   statusList = [
     {
       value: 'draft',
@@ -34,19 +36,50 @@ export class InvoiceDetails {
     },
   ];
 
-  constructor(
-    private router: Router,
-    private invoiceService: InvoiceService,
-    private dialog: MatDialog,
-    private cdr: ChangeDetectorRef,
-  ) {
-    this.item = history.state.item;
+  // Get the colors based on the current invoice status
+  get statusStyle() {
+    const style = this.statusList.find((status) => status.value === this.item?.status);
+
+    return {
+      textColor: style?.textColor ?? '',
+      backgroundColor: style?.backgroundColor ?? '',
+    };
   }
 
-  getStatusStyle(status: string) {
-    return this.statusList.find((item) => item.value === status);
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private invoiceService: InvoiceService,
+    private dialog: MatDialog,
+    private toastr: ToastrService,
+    private cdr: ChangeDetectorRef,
+  ) {}
+
+  ngOnInit(): void {
+    const invoiceId = this.route.snapshot.paramMap.get('id');
+
+    console.log('Invoice ID from URL:', invoiceId);
+
+    if (!invoiceId) {
+      console.error('No invoice ID found in URL');
+      return;
+    }
+
+    this.invoiceService.getInvoice(invoiceId).subscribe({
+      next: (invoice) => {
+        console.log('Invoice loaded from backend:', invoice);
+
+        this.item = invoice;
+        this.cdr.detectChanges();
+      },
+
+      error: (error) => {
+        console.error('Error loading invoice:', error);
+      },
+    });
   }
-  goBack() {
+
+  goBack(): void {
     this.router.navigate(['/']);
   }
 
@@ -55,24 +88,33 @@ export class InvoiceDetails {
       height: '250px',
       width: '480px',
       data: {
-        invoiceId: invoiceId,
+        invoiceId,
       },
     });
   }
 
   markAsPaid(): void {
-    if (this.item.status !== 'pending' && this.item.status !== 'draft') {
+    const invoiceId = this.route.snapshot.paramMap.get('id');
+
+    if (!invoiceId) {
       return;
     }
 
-    this.invoiceService.markAsPaid(this.item.invoiceId).subscribe({
-      next: (updatedInvoice) => {
-        this.item = updatedInvoice;
+    this.invoiceService.markAsPaid(invoiceId).subscribe({
+      next: (invoice) => {
+        console.log('Updated invoice from backend:', invoice);
+
+        this.item = invoice;
+
         this.cdr.detectChanges();
-        //this.router.navigate(['/']);
+
+        this.toastr.success('Invoice marked as paid');
       },
+
       error: (error) => {
         console.error('Error updating invoice:', error);
+
+        this.toastr.error('Failed to update invoice', 'Error');
       },
     });
   }
