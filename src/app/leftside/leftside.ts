@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
   templateUrl: './leftside.html',
   styleUrl: './leftside.scss',
 })
-export class Leftside {}
+export class Leftside {
+  constructor() {}
+
+  changeTheme() {
+    console.log('I click the sun image');
+  }
+}
