@@ -96,7 +96,16 @@ export class InvoiceDetails implements OnInit {
   markAsPaid(): void {
     const invoiceId = this.route.snapshot.paramMap.get('id');
 
-    if (!invoiceId) {
+    if (!invoiceId || !this.item) {
+      return;
+    }
+
+    if (this.item.status === 'paid') {
+      this.toastr.error('Invoice is already paid', 'Error');
+      return;
+    }
+
+    if (this.item.status !== 'pending' && this.item.status !== 'draft') {
       return;
     }
 

@@ -100,24 +100,27 @@ export class Invoices implements OnInit {
     });
   }
 
-  markAsPaid(invoiceId: string): void {
-    const invoice = this.items.find((item) => item.invoiceId === invoiceId);
+  // markAsPaid(invoiceId: string): void {
+  //   const invoice = this.items.find((item) => item.invoiceId === invoiceId);
 
-    if (!invoice || (invoice.status !== 'pending' && invoice.status !== 'draft')) {
-      return;
-    }
+  //   if (!invoice || (invoice.status !== 'pending' && invoice.status !== 'draft')) {
+  //     return;
+  //   }
 
-    this.invoiceService.markAsPaid(invoiceId).subscribe({
-      next: () => {
-        invoice.status = 'paid';
+  //   this.invoiceService.markAsPaid(invoiceId).subscribe({
+  //     next: () => {
+  //       if (!invoice || (invoice.status !== 'pending' && invoice.status !== 'draft')) {
+  //         return;
+  //       }
+  //       invoice.status = 'paid';
 
-        this.toastr.success('Invoice marked as paid');
-      },
-      error: (error: any) => {
-        console.error('Error updating invoice:', error);
+  //       this.toastr.success('Invoice marked as paid');
+  //     },
+  //     error: (error: any) => {
+  //       console.error('Error updating invoice:', error);
 
-        this.toastr.error('Failed to update invoice', 'Error');
-      },
-    });
-  }
+  //       this.toastr.error('Failed to update invoice', 'Error');
+  //     },
+  //   });
+  // }
 }
