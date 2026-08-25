@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ThemeService } from '../services/theme';
 
 @Component({
   selector: 'app-leftside',
@@ -8,9 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './leftside.scss',
 })
 export class Leftside {
+  private themeService = inject(ThemeService);
   constructor() {}
 
-  changeTheme() {
-    console.log('I click the sun image');
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 }

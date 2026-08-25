@@ -1,3 +1,38 @@
-.invoices-container {
-  margin-left: calc(50% - 365px);
+.details-page {
+  background-color: var(--invoice-background);
+  color: var(--invoice-text);
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.details-card {
+  background-color: var(--invoice-surface);
+  color: var(--invoice-text);
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.details-primary-text {
+  color: var(--invoice-text);
+}
+
+.details-secondary-text {
+  color: var(--invoice-secondary);
+}
+
+.details-items {
+  background-color: var(--invoice-background);
+
+  transition: background-color 0.2s ease;
+}
+
+.details-amount {
+  background-color: var(--invoice-sidebar);
+  color: #ffffff;
+
+  transition: background-color 0.2s ease;
 }

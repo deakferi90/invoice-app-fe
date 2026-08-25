@@ -11,3 +11,20 @@
 .status-filter {
   width: 180px;
 }
+
+.invoice-card {
+  background-color: var(--invoice-surface);
+  color: var(--invoice-secondary);
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.invoice-primary-text {
+  color: var(--invoice-text);
+}
+
+.invoice-secondary-text {
+  color: var(--invoice-secondary);
+}

@@ -1,5 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
 
+/* =========================
+   Theme variables
+========================= */
+
+:root {
+  --invoice-sidebar: #373b53;
+  --invoice-background: #f8f8fb;
+  --invoice-surface: #ffffff;
+  --invoice-text: #0c0e16;
+  --invoice-secondary: #888eb0;
+}
+
+html.dark {
+  --invoice-sidebar: #1e2139;
+  --invoice-background: #141625;
+  --invoice-surface: #373b53;
+  --invoice-text: #ffffff;
+  --invoice-secondary: #dfe3fa;
+}
+
+/* =========================
+   Global styles
+========================= */
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background-color: var(--invoice-background);
+  color: var(--invoice-text);
+
+  font-family: 'League Spartan', sans-serif;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* =========================
+   Toastr
+========================= */
+
 #toast-container {
   position: fixed !important;
   top: 24px !important;

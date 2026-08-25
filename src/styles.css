@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+/* =========================
+   Angular Material
+========================= */
+
 .cdk-overlay-pane {
   z-index: 1000 !important;
   background: #fff !important;
@@ -22,18 +26,19 @@ div.mat-mdc-select-panel {
   width: 20px !important;
   height: 20px !important;
   border-radius: 4px !important;
-
   border: 1px solid #9277ff !important;
   background: #eee9ff !important;
 }
 
-/* Selected */
+/* Selected checkbox */
+
 .mat-pseudo-checkbox.mat-pseudo-checkbox-checked {
   background: #9277ff !important;
   border-color: #9277ff !important;
 }
 
-/* White checkmark */
+/* Checkmark */
+
 .mat-pseudo-checkbox.mat-pseudo-checkbox-checked::after {
   border-color: #ffffff !important;
 }

@@ -1,10 +1,13 @@
 .left-header {
   width: 103px;
   height: 100%;
-  background: #373b53;
-  position: fixed;
+  background: var(--invoice-sidebar);
+  position: absolute;
   top: 0;
   left: 0;
+
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+
+  transition: background 0.2s ease;
 }
