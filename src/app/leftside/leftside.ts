@@ -9,10 +9,21 @@ import { ThemeService } from '../services/theme';
   styleUrl: './leftside.scss',
 })
 export class Leftside {
-  private themeService = inject(ThemeService);
-  constructor() {}
+  protected themeService = inject(ThemeService);
+
+  private isProcessing = false;
 
   toggleTheme(): void {
+    if (this.isProcessing) {
+      return;
+    }
+
+    this.isProcessing = true;
+
     this.themeService.toggleTheme();
+
+    setTimeout(() => {
+      this.isProcessing = false;
+    }, 200);
   }
 }

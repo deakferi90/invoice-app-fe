@@ -48,7 +48,7 @@
     <div class="box-container mt-17.5">
       @for (item of filteredItems; track item.invoiceId) {
         <div
-          class="invoice-card mt-10 w-182.5 h-18 grid grid-cols-[100px_150px_1fr_100px_160px_8px] items-center text-[#888EB0] px-8 cursor-pointer hover:border-[#7C3AED]"
+          class="invoice-card mt-10 w-182.5 h-18 grid grid-cols-[100px_150px_1fr_100px_160px_8px] items-center text-[#888EB0] px-8 cursor-pointer rounded-lg hover:border-[#7C3AED]"
           (click)="redirectToDetails(item)"
         >
           <p class="invoice-primary-text font-bold">

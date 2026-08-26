@@ -5,8 +5,8 @@
       <div class="border-b border-[#979797]">
         <img
           (click)="toggleTheme()"
-          src="/moon.png"
-          class="text-center block mx-auto p-5 cursor-pointer"
+          [src]="themeService.isDarkMode() ? '/full-moon.png' : '/moon.png'"
+          class="text-center block mx-auto p-5 cursor-pointer w-[60px] h-[60px]"
           alt="moon"
         />
       </div>
