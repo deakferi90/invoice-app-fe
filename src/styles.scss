@@ -87,3 +87,20 @@ body {
   color: #ffffff;
   opacity: 1;
 }
+
+.mat-mdc-select-panel.invoice-select-panel {
+  background-color: var(--invoice-surface) !important;
+}
+
+.mat-mdc-select-panel.invoice-select-panel .mat-mdc-option {
+  background-color: var(--invoice-surface) !important;
+  color: var(--invoice-text) !important;
+}
+
+.mat-mdc-select-panel.invoice-select-panel .mat-mdc-option:hover {
+  background-color: var(--invoice-hover) !important;
+}
+
+.mat-mdc-select-panel.invoice-select-panel .mat-mdc-option.mdc-list-item--selected {
+  background-color: var(--invoice-hover) !important;
+}

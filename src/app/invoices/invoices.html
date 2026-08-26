@@ -8,7 +8,7 @@
       <mat-form-field>
         <mat-label>Filter By Status</mat-label>
 
-        <mat-select [formControl]="selectedStatuses" multiple>
+        <mat-select [formControl]="selectedStatuses" multiple panelClass="invoice-select-panel">
           <mat-select-trigger>
             @if (selectedStatuses.value.length > 0) {
               {{ selectedStatuses.value[0] }}

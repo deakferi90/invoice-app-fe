@@ -28,3 +28,21 @@
 .invoice-secondary-text {
   color: var(--invoice-secondary);
 }
+
+.mat-mdc-select-panel.invoice-card {
+  background-color: var(--invoice-surface) !important;
+  border-radius: 8px !important;
+}
+
+.mat-mdc-select-panel.invoice-card .mat-mdc-option {
+  background-color: var(--invoice-surface) !important;
+  color: var(--invoice-text) !important;
+}
+
+.mat-mdc-select-panel.invoice-card .mat-mdc-option:hover {
+  background-color: var(--invoice-hover) !important;
+}
+
+.mat-mdc-select-panel.invoice-card .mat-mdc-option.mdc-list-item--selected {
+  background-color: var(--invoice-hover) !important;
+}
