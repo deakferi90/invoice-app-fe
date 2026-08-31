@@ -1,25 +1,58 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule, MatSelect } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
-import { InvoiceService } from './invoice';
-import { Invoice } from './invoice.interface';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Store } from '@ngrx/store';
+
+import { Invoice } from './invoice.interface';
+
+import { loadInvoices } from '../store/invoice.actions';
+import { selectInvoices } from '../store/invoice.selectors';
+import { combineLatest, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-invoices',
   standalone: true,
-  imports: [DatePipe, MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    DatePipe,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+  ],
   templateUrl: './invoices.html',
   styleUrl: './invoices.scss',
 })
 export class Invoices implements OnInit {
   @ViewChild(MatSelect) matSelect!: MatSelect;
+
+  protected store = inject(Store);
+
   items: Invoice[] = [];
   filteredItems: Invoice[] = [];
+
+  selectedStatuses = new FormControl<string[]>([], {
+    nonNullable: true,
+  });
+
+  invoices$ = this.store.select(selectInvoices);
+
+  filteredInvoices$ = combineLatest([
+    this.invoices$,
+    this.selectedStatuses.valueChanges.pipe(startWith(this.selectedStatuses.value)),
+  ]).pipe(
+    map(([invoices, statuses]) => {
+      if (statuses.length === 0) {
+        return invoices;
+      }
+
+      return invoices.filter((invoice) => statuses.includes(invoice.status));
+    }),
+  );
 
   statusList = [
     {
@@ -39,19 +72,18 @@ export class Invoices implements OnInit {
     },
   ];
 
-  selectedStatuses = new FormControl<string[]>([], {
-    nonNullable: true,
-  });
-
   constructor(
-    private invoiceService: InvoiceService,
-    private cdr: ChangeDetectorRef,
     private router: Router,
     private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
-    this.getData();
+    this.store.dispatch(loadInvoices());
+
+    this.invoices$.subscribe((invoices) => {
+      this.items = invoices;
+      this.filterInvoices(this.selectedStatuses.value);
+    });
 
     this.selectedStatuses.valueChanges.subscribe((statuses) => {
       this.filterInvoices(statuses);
@@ -84,19 +116,6 @@ export class Invoices implements OnInit {
   redirectToDetails(item: Invoice) {
     this.router.navigate(['/invoice', item.invoiceId], {
       state: { item },
-    });
-  }
-
-  getData(): void {
-    this.invoiceService.displayData().subscribe({
-      next: (data) => {
-        this.items = data;
-        this.filteredItems = data;
-        this.cdr.detectChanges();
-      },
-      error: (error) => {
-        console.error('Error fetching invoices:', error);
-      },
     });
   }
 }

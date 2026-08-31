@@ -5,7 +5,7 @@ export const loadInvoices = createAction('[Invoice] Load Invoices');
 
 export const loadInvoicesSuccess = createAction(
   '[Invoice] Load Invoices Success',
-  props<{ incoices: Invoice[] }>(),
+  props<{ invoices: Invoice[] }>(),
 );
 
 export const loadInvoicesFailure = createAction(
@@ -13,7 +13,7 @@ export const loadInvoicesFailure = createAction(
   props<{ error: string }>(),
 );
 
-export const addInvoice = createAction('[Invoice] Add Invoice', props<{ incoice: Invoice }>());
+export const addInvoice = createAction('[Invoice] Add Invoice', props<{ invoice: Invoice }>());
 
 export const addInvoiceSuccess = createAction(
   '[Invoice] Add Invoice Success',
@@ -27,12 +27,12 @@ export const addInvoiceFailure = createAction(
 
 export const deleteInvoice = createAction(
   '[Invoice] Delete Invoice',
-  props<{ incoiceId: string }>(),
+  props<{ invoiceId: string }>(),
 );
 
 export const deleteInvoiceSuccess = createAction(
   '[Invoice] Delete Invoice Success',
-  props<{ incoiceId: string }>(),
+  props<{ invoiceId: string }>(),
 );
 
 export const deleteInvoiceFailure = createAction(
@@ -40,11 +40,11 @@ export const deleteInvoiceFailure = createAction(
   props<{ error: string }>(),
 );
 
-export const markAsPaid = createAction('[Invoice] Mark As Paid', props<{ incoiceId: string }>());
+export const markAsPaid = createAction('[Invoice] Mark As Paid', props<{ invoiceId: string }>());
 
 export const markAsPaidSuccess = createAction(
   '[Invoice] Mark As Paid Success',
-  props<{ incoice: Invoice }>(),
+  props<{ invoices: Invoice }>(),
 );
 
 export const markAsPaidFailure = createAction(

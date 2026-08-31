@@ -46,35 +46,37 @@
     </div>
 
     <div class="box-container mt-17.5">
-      @for (item of filteredItems; track item.invoiceId) {
+      @for (invoice of invoices$ | async; track invoice.invoiceId) {
         <div
           class="invoice-card mt-10 w-182.5 h-18 grid grid-cols-[100px_150px_1fr_100px_160px_8px] items-center text-[#888EB0] px-8 cursor-pointer rounded-lg hover:border-[#7C3AED]"
-          (click)="redirectToDetails(item)"
+          (click)="redirectToDetails(invoice)"
         >
           <p class="invoice-primary-text font-bold">
-            <span class="invoice-secondary-text">#</span>{{ item.invoiceId }}
+            <span class="invoice-secondary-text">#</span>{{ invoice.invoiceId }}
           </p>
 
-          <p>Due {{ item.paymentDue | date: 'dd MMM yyyy' }}</p>
+          <p>Due {{ invoice.paymentDue | date: 'dd MMM yyyy' }}</p>
 
           <p>
-            {{ item.clientName }}
+            {{ invoice.clientName }}
           </p>
 
-          <p class="justify-self-center invoice-primary-text font-bold">&pound;{{ item.total }}</p>
+          <p class="justify-self-center invoice-primary-text font-bold">
+            &pound;{{ invoice.total }}
+          </p>
 
           <div class="justify-self-center flex items-center gap-4">
             <div
               class="flex items-center px-4 py-2.5 rounded-md font-bold"
-              [style.color]="getStatus(item.status)?.textColor"
-              [style.background-color]="getStatus(item.status)?.backgroundColor"
+              [style.color]="getStatus(invoice.status)?.textColor"
+              [style.background-color]="getStatus(invoice.status)?.backgroundColor"
             >
               <span
                 class="w-2 h-2 mr-2 rounded-full"
-                [style.background-color]="getStatus(item.status)?.textColor"
+                [style.background-color]="getStatus(invoice.status)?.textColor"
               ></span>
 
-              {{ item.status.charAt(0).toUpperCase() + item.status.slice(1) }}
+              {{ invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1) }}
             </div>
           </div>
           <div class="cursor-pointer">
