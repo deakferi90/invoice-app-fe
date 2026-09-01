@@ -48,5 +48,10 @@
 }
 
 .drawer-container {
-  height: 100vh !important;
+  z-index: 0;
+}
+
+.mat-drawer {
+  height: 100vh;
+  position: fixed;
 }

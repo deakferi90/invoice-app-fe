@@ -106,9 +106,7 @@ body {
 }
 
 .mat-drawer.mat-drawer-opened.mat-drawer-opened {
-  position: absolute !important;
-  left: 103px !important;
-  height: 100vh !important;
+  margin-left: 103px;
 }
 
 .mat-drawer-inner-container {
