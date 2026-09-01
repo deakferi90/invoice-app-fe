@@ -32,9 +32,6 @@ export class Invoices implements OnInit {
 
   protected store = inject(Store);
 
-  items: Invoice[] = [];
-  filteredItems: Invoice[] = [];
-
   selectedStatuses = new FormControl<string[]>([], {
     nonNullable: true,
   });
@@ -80,24 +77,9 @@ export class Invoices implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(loadInvoices());
 
-    this.invoices$.subscribe((invoices) => {
-      this.items = invoices;
-      this.filterInvoices(this.selectedStatuses.value);
+    this.selectedStatuses.valueChanges.subscribe(() => {
+      this.matSelect?.close();
     });
-
-    this.selectedStatuses.valueChanges.subscribe((statuses) => {
-      this.filterInvoices(statuses);
-      this.matSelect.close();
-    });
-  }
-
-  filterInvoices(statuses: string[]): void {
-    if (statuses.length === 0) {
-      this.filteredItems = this.items;
-      return;
-    }
-
-    this.filteredItems = this.items.filter((invoice) => statuses.includes(invoice.status));
   }
 
   getStatus(status: string) {
