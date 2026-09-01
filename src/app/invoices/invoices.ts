@@ -5,6 +5,7 @@ import { MatSelectModule, MatSelect } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { Invoice } from './invoice.interface';
 
@@ -21,6 +22,7 @@ import { combineLatest, map, startWith } from 'rxjs';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSidenavModule,
     CommonModule,
   ],
   templateUrl: './invoices.html',

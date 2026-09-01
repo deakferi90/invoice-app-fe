@@ -1,89 +1,118 @@
-<div class="invoices-container">
-  <div class="w-3xl pl-4.75">
-    <div class="inner-header pt-12.5 flex justify-between">
-      <div>
-        <h1 class="text-4xl font-bold">Invoices</h1>
-        <span class="invoice-secondary-text font-normal">These are 4 pending invoices</span>
-      </div>
-      <mat-form-field>
-        <mat-label>Filter By Status</mat-label>
+<mat-drawer-container class="drawer-container bg-amber-50">
+  <!-- DRAWER -->
+  <mat-drawer #drawer mode="over" position="start" class="invoice-drawer h-full">
+    <div class="p-8">
+      <h2 class="text-2xl font-bold text-[#0C0E16] h-full">New Invoice</h2>
 
-        <mat-select [formControl]="selectedStatuses" multiple panelClass="invoice-select-panel">
-          <mat-select-trigger>
-            @if (selectedStatuses.value.length > 0) {
-              {{ selectedStatuses.value[0] }}
+      <!-- Your new invoice form will go here -->
 
-              @if (selectedStatuses.value.length > 1) {
-                <span class="example-additional-selection">
-                  (+{{ selectedStatuses.value.length - 1 }}
-                  {{ selectedStatuses.value.length === 2 ? 'other' : 'others' }})
-                </span>
-              }
-            } @else {
-              Filter By Status
-            }
-          </mat-select-trigger>
-
-          @for (status of statusList; track status) {
-            <mat-option [value]="status.value">
-              {{ status.value }}
-            </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <div class="font-bold height-[48px] flex items-center gap-2.5">
-        <button
-          class="bg-[#9277FF] w-37.5 h-12 mr-5 rounded-4xl text-white cursor-pointer flex items-center gap-2 pl-2"
-        >
-          <span
-            class="w-8 h-8 rounded-full bg-[#F8F8FB] flex items-center justify-center text-[#9277FF] pb-1.25 text-2xl pt-1.5"
-            >+</span
-          >
-          New Invoice
-        </button>
-      </div>
+      <button class="mt-5 bg-gray-500 text-white px-5 py-2 rounded" (click)="drawer.close()">
+        Close
+      </button>
     </div>
+  </mat-drawer>
 
-    <div class="box-container mt-17.5">
-      @for (invoice of filteredInvoices$ | async; track invoice.invoiceId) {
-        <div
-          class="invoice-card mt-10 w-182.5 h-18 grid grid-cols-[100px_150px_1fr_100px_160px_8px] items-center text-[#888EB0] px-8 cursor-pointer rounded-lg hover:border-[#7C3AED]"
-          (click)="redirectToDetails(invoice)"
-        >
-          <p class="invoice-primary-text font-bold">
-            <span class="invoice-secondary-text">#</span>{{ invoice.invoiceId }}
-          </p>
+  <!-- MAIN PAGE -->
+  <mat-drawer-content>
+    <div class="invoices-container">
+      <div class="w-3xl pl-4.75">
+        <!-- HEADER -->
+        <div class="inner-header pt-12.5 flex justify-between">
+          <div>
+            <h1 class="text-4xl font-bold">Invoices</h1>
 
-          <p>Due {{ invoice.paymentDue | date: 'dd MMM yyyy' }}</p>
+            <span class="invoice-secondary-text font-normal"> These are 4 pending invoices </span>
+          </div>
 
-          <p>
-            {{ invoice.clientName }}
-          </p>
+          <!-- FILTER -->
+          <mat-form-field>
+            <mat-label>Filter By Status</mat-label>
 
-          <p class="justify-self-center invoice-primary-text font-bold">
-            &pound;{{ invoice.total }}
-          </p>
+            <mat-select [formControl]="selectedStatuses" multiple panelClass="invoice-select-panel">
+              <mat-select-trigger>
+                @if (selectedStatuses.value.length > 0) {
+                  {{ selectedStatuses.value[0] }}
 
-          <div class="justify-self-center flex items-center gap-4">
-            <div
-              class="flex items-center px-4 py-2.5 rounded-md font-bold"
-              [style.color]="getStatus(invoice.status)?.textColor"
-              [style.background-color]="getStatus(invoice.status)?.backgroundColor"
+                  @if (selectedStatuses.value.length > 1) {
+                    <span class="example-additional-selection">
+                      (+{{ selectedStatuses.value.length - 1 }}
+                      {{ selectedStatuses.value.length === 2 ? 'other' : 'others' }})
+                    </span>
+                  }
+                } @else {
+                  Filter By Status
+                }
+              </mat-select-trigger>
+
+              @for (status of statusList; track status) {
+                <mat-option [value]="status.value">
+                  {{ status.value }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <!-- NEW INVOICE BUTTON -->
+          <div class="font-bold height-[48px] flex items-center gap-2.5">
+            <button
+              class="bg-[#9277FF] w-37.5 h-12 mr-5 rounded-4xl text-white cursor-pointer flex items-center gap-2 pl-2"
+              (click)="drawer.open()"
             >
               <span
-                class="w-2 h-2 mr-2 rounded-full"
-                [style.background-color]="getStatus(invoice.status)?.textColor"
-              ></span>
+                class="w-8 h-8 rounded-full bg-[#F8F8FB] flex items-center justify-center text-[#9277FF] pb-1.25 text-2xl pt-1.5"
+              >
+                +
+              </span>
 
-              {{ invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1) }}
-            </div>
-          </div>
-          <div class="cursor-pointer">
-            <img src="/arrow-right.png" alt="arrow-right" />
+              New Invoice
+            </button>
           </div>
         </div>
-      }
+
+        <!-- INVOICE LIST -->
+        <div class="box-container mt-17.5">
+          @for (invoice of filteredInvoices$ | async; track invoice.invoiceId) {
+            <div
+              class="invoice-card mt-10 w-182.5 h-18 grid grid-cols-[100px_150px_1fr_100px_160px_8px] items-center text-[#888EB0] px-8 cursor-pointer rounded-lg hover:border-[#7C3AED]"
+              (click)="redirectToDetails(invoice)"
+            >
+              <p class="invoice-primary-text font-bold">
+                <span class="invoice-secondary-text">#</span>
+                {{ invoice.invoiceId }}
+              </p>
+
+              <p>Due {{ invoice.paymentDue | date: 'dd MMM yyyy' }}</p>
+
+              <p>
+                {{ invoice.clientName }}
+              </p>
+
+              <p class="justify-self-center invoice-primary-text font-bold">
+                &pound;{{ invoice.total }}
+              </p>
+
+              <div class="justify-self-center flex items-center gap-4">
+                <div
+                  class="flex items-center px-4 py-2.5 rounded-md font-bold"
+                  [style.color]="getStatus(invoice.status)?.textColor"
+                  [style.background-color]="getStatus(invoice.status)?.backgroundColor"
+                >
+                  <span
+                    class="w-2 h-2 mr-2 rounded-full"
+                    [style.background-color]="getStatus(invoice.status)?.textColor"
+                  ></span>
+
+                  {{ invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1) }}
+                </div>
+              </div>
+
+              <div class="cursor-pointer">
+                <img src="/arrow-right.png" alt="arrow-right" />
+              </div>
+            </div>
+          }
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </mat-drawer-content>
+</mat-drawer-container>
