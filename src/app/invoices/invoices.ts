@@ -4,7 +4,6 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule, MatSelect } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
 
 import { Invoice } from './invoice.interface';
@@ -69,10 +68,7 @@ export class Invoices implements OnInit {
     },
   ];
 
-  constructor(
-    private router: Router,
-    private toastr: ToastrService,
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.store.dispatch(loadInvoices());

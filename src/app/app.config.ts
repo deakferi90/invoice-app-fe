@@ -1,6 +1,7 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideToastr } from 'ngx-toastr';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
@@ -23,5 +24,9 @@ export const appConfig: ApplicationConfig = {
       invoices: invoiceReducer,
     }),
     provideEffects(InvoiceEffects),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+    }),
   ],
 };
