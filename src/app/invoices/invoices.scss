@@ -53,4 +53,22 @@
 
 .mat-drawer {
   position: fixed;
+  background-color: var(--drawer-bg) !important;
+  color: var(--drawer-text) !important;
+  border-color: var(--drawer-border) !important;
+}
+
+.mat-drawer-inner-container {
+  background-color: var(--drawer-bg);
+  color: var(--drawer-text);
+}
+
+.mat-drawer a,
+.mat-drawer button {
+  color: var(--drawer-text);
+}
+
+.mat-drawer a:hover,
+.mat-drawer button:hover {
+  background-color: var(--drawer-hover);
 }

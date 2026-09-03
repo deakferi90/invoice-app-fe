@@ -10,6 +10,10 @@
   --invoice-surface: #ffffff;
   --invoice-text: #0c0e16;
   --invoice-secondary: #888eb0;
+  --drawer-bg: #ffffff;
+  --drawer-text: #0c0e16;
+  --drawer-border: #dfe3fa;
+  --drawer-hover: #f8f8fb;
 }
 
 html.dark {
@@ -18,6 +22,10 @@ html.dark {
   --invoice-surface: #373b53;
   --invoice-text: #ffffff;
   --invoice-secondary: #dfe3fa;
+  --drawer-bg: #1e2130;
+  --drawer-text: #ffffff;
+  --drawer-border: #34384d;
+  --drawer-hover: #292d3d;
 }
 
 /* =========================
