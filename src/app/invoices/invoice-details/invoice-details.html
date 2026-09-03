@@ -1,7 +1,6 @@
 @if (item) {
   <div class="details-page min-h-screen px-8 py-8">
     <div class="mx-auto max-w-190">
-      <!-- Back -->
       <div class="group mb-7 flex w-fit cursor-pointer items-center gap-3" (click)="goBack()">
         <img
           src="/arrow-right.png"
@@ -14,7 +13,6 @@
         </span>
       </div>
 
-      <!-- Status / Actions -->
       <div
         class="details-card mb-6 flex h-22.75 items-center justify-between rounded-lg px-8 shadow-sm"
       >
@@ -60,9 +58,7 @@
         </div>
       </div>
 
-      <!-- Invoice -->
       <div class="details-card rounded-lg px-12 py-12 shadow-sm">
-        <!-- Header -->
         <div class="flex justify-between">
           <div>
             <h2 class="details-primary-text font-bold">
@@ -82,9 +78,7 @@
           </div>
         </div>
 
-        <!-- Invoice information -->
         <div class="mt-10 grid grid-cols-3 gap-8">
-          <!-- Invoice date -->
           <div>
             <p class="details-secondary-text text-sm">Invoice Date</p>
 
@@ -99,7 +93,6 @@
             </p>
           </div>
 
-          <!-- Bill to -->
           <div>
             <p class="details-secondary-text text-sm">Bill To</p>
 
@@ -115,7 +108,6 @@
             </div>
           </div>
 
-          <!-- Email -->
           <div>
             <p class="details-secondary-text text-sm">Sent to</p>
 
@@ -125,9 +117,7 @@
           </div>
         </div>
 
-        <!-- Items -->
         <div class="details-items mt-12 overflow-hidden rounded-lg">
-          <!-- Items header -->
           <div
             class="details-secondary-text grid grid-cols-[1fr_80px_110px_110px] px-8 pt-8 text-sm"
           >
@@ -140,7 +130,6 @@
             <span class="text-right"> Total </span>
           </div>
 
-          <!-- Items -->
           @for (invoiceItem of item.items; track invoiceItem.name) {
             <div
               class="details-primary-text grid grid-cols-[1fr_80px_110px_110px] px-8 py-4 font-bold"
@@ -161,7 +150,6 @@
             </div>
           }
 
-          <!-- Amount -->
           <div class="details-amount flex h-20.75 items-center justify-between px-8">
             <span class="text-sm"> Amount Due </span>
 

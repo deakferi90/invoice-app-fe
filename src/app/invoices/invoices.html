@@ -1,10 +1,7 @@
 <mat-drawer-container class="drawer-container bg-amber-50">
-  <!-- DRAWER -->
   <mat-drawer #drawer position="start" class="invoice-drawer">
     <div class="p-8">
       <h2 class="text-2xl font-bold text-[#0C0E16] h-full">New Invoice</h2>
-
-      <!-- Your new invoice form will go here -->
 
       <button class="mt-5 bg-gray-500 text-white px-5 py-2 rounded" (click)="drawer.close()">
         Close
@@ -12,11 +9,9 @@
     </div>
   </mat-drawer>
 
-  <!-- MAIN PAGE -->
   <mat-drawer-content>
     <div class="invoices-container">
       <div class="w-3xl pl-4.75">
-        <!-- HEADER -->
         <div class="inner-header pt-12.5 flex justify-between">
           <div>
             <h1 class="text-4xl font-bold">Invoices</h1>
@@ -24,7 +19,6 @@
             <span class="invoice-secondary-text font-normal"> These are 4 pending invoices </span>
           </div>
 
-          <!-- FILTER -->
           <mat-form-field>
             <mat-label>Filter By Status</mat-label>
 
@@ -52,7 +46,6 @@
             </mat-select>
           </mat-form-field>
 
-          <!-- NEW INVOICE BUTTON -->
           <div class="font-bold height-[48px] flex items-center gap-2.5">
             <button
               class="bg-[#9277FF] w-37.5 h-12 mr-5 rounded-4xl text-white cursor-pointer flex items-center gap-2 pl-2"
@@ -69,7 +62,6 @@
           </div>
         </div>
 
-        <!-- INVOICE LIST -->
         <div class="box-container mt-17.5">
           @for (invoice of filteredInvoices$ | async; track invoice.invoiceId) {
             <div
