@@ -1,11 +1,7 @@
 <mat-drawer-container class="drawer-container bg-amber-50">
   <mat-drawer #drawer position="start" class="invoice-drawer">
     <div class="p-8">
-      <h2 class="text-2xl font-bold text-[#0C0E16] h-full">New Invoice</h2>
-
-      <button class="mt-5 bg-gray-500 text-white px-5 py-2 rounded" (click)="drawer.close()">
-        Close
-      </button>
+      <app-new-invoice></app-new-invoice>
     </div>
   </mat-drawer>
 

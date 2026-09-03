@@ -12,6 +12,7 @@ import { Invoice } from './invoice.interface';
 import { loadInvoices } from '../store/invoice.actions';
 import { selectInvoices } from '../store/invoice.selectors';
 import { combineLatest, map, startWith } from 'rxjs';
+import { NewInvoiceComponent } from './new-invoice/new-invoice';
 
 @Component({
   selector: 'app-invoices',
@@ -24,6 +25,7 @@ import { combineLatest, map, startWith } from 'rxjs';
     ReactiveFormsModule,
     MatSidenavModule,
     CommonModule,
+    NewInvoiceComponent,
   ],
   templateUrl: './invoices.html',
   styleUrl: './invoices.scss',
