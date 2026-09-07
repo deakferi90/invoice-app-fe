@@ -49,6 +49,7 @@
 
 .drawer-container {
   z-index: 0;
+  height: 90vh;
 }
 
 .mat-drawer {
@@ -56,6 +57,7 @@
   background-color: var(--drawer-bg) !important;
   color: var(--drawer-text) !important;
   border-color: var(--drawer-border) !important;
+  overflow: hidden !important;
 }
 
 .mat-drawer-inner-container {

@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
 
+$purple: #7c5dfa;
+$purple-dark: #9277ff;
+$navy: #252945;
+$text: #0c0e16;
+$muted: #888eb0;
+$border: #dfe3fa;
+$background: #f8f8fb;
+$white: #ffffff;
+$red: #ec5757;
+
 /* =========================
    Theme variables
 ========================= */
@@ -120,4 +130,59 @@ body {
 
 .mat-drawer-inner-container {
   background: #fff;
+}
+
+.dark .mat-drawer-inner-container {
+  background: #141625;
+  color: #fff;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  color: $muted;
+
+  font-size: 12px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+
+  height: 44px;
+
+  padding: 0 16px;
+
+  border: 1px solid $border;
+
+  border-radius: 4px;
+
+  background: white;
+
+  color: $text;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  outline: none;
+
+  transition: border-color 0.2s;
+}
+
+html.dark .form-group input,
+html.dark .form-group select {
+  background: #141625 !important;
+  color: #fff !important;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: $purple;
 }

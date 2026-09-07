@@ -12,6 +12,16 @@ $red: #ec5757;
   box-sizing: border-box;
 }
 
+:host {
+  background-color: white;
+  color: #0c0e16;
+}
+
+:host-context(.dark) {
+  background-color: var(--invoice-sidebar);
+  color: white;
+}
+
 .invoice-page {
   min-height: 100vh;
   background: $background;
@@ -209,6 +219,12 @@ $red: #ec5757;
   outline: none;
 
   transition: border-color 0.2s;
+
+  .dark {
+    background: #1e2139;
+    color: white;
+    border-color: #252945;
+  }
 }
 
 .form-group input:focus,

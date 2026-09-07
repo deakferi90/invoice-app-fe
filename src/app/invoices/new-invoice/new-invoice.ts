@@ -141,10 +141,7 @@ export class NewInvoiceComponent implements OnInit {
 
     let startDay = firstDay.getDay();
 
-    // Monday = 0
     startDay = startDay === 0 ? 6 : startDay - 1;
-
-    // Previous month
 
     const previousMonthDays = new Date(this.calendarYear, this.calendarMonth, 0).getDate();
 
@@ -157,8 +154,6 @@ export class NewInvoiceComponent implements OnInit {
       });
     }
 
-    // Current month
-
     for (let day = 1; day <= daysInMonth; day++) {
       this.calendarDays.push({
         date: day,
@@ -167,8 +162,6 @@ export class NewInvoiceComponent implements OnInit {
         otherMonth: false,
       });
     }
-
-    // Next month
 
     let nextDay = 1;
 
@@ -225,8 +218,6 @@ export class NewInvoiceComponent implements OnInit {
     );
   }
 
-  /* ==================== ITEMS ==================== */
-
   calculateItem(item: InvoiceItem): void {
     const quantity = Number(item.quantity) || 0;
     const price = Number(item.price) || 0;
@@ -265,8 +256,6 @@ export class NewInvoiceComponent implements OnInit {
     return value.toFixed(2);
   }
 
-  /* ==================== VALIDATION ==================== */
-
   validateInvoice(): boolean {
     const billTo = this.invoice.billTo;
     const client = this.invoice.client;
@@ -292,8 +281,6 @@ export class NewInvoiceComponent implements OnInit {
 
     return this.invoice.items.every((item) => !!item.name && item.quantity > 0 && item.price >= 0);
   }
-
-  /* ==================== ACTIONS ==================== */
 
   saveInvoice(): void {
     if (!this.validateInvoice()) {
